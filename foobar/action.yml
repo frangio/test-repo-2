@@ -16,4 +16,4 @@ runs:
         repository: ${{github.action_repository}}
         ref: ${{github.action_ref}}
         path: .tmp/test-repo-2
-    - uses: .tmp/test-repo-2/other
+    - uses: ./.tmp/test-repo-2/other
