@@ -11,9 +11,9 @@ runs:
       run: |
         sha="$(gh api /repos/${{github.repository}}/contents/README -q .sha)"
         gh api -X PUT /repos/${{github.repository}}/contents/README -f message=update -f content="$(date | base64)" -f sha="$sha"
-    - uses: jenseng/dynamic-uses@5175289a9a87978dcfcb9cf512b821d23b2a53eb
-      env:
-        action_repository: ${{github.action_repository}}
-        action_ref: ${{github.action_ref}}
+    - uses: actions/checkout@v3
       with:
-        uses: ${{env.action_repository}}/other@${{env.action_ref}}
+        repository: ${{github.action_repository}}
+        ref: ${{github.action_ref}}
+        path: .tmp/test-repo-2
+    - uses: .tmp/test-repo-2/other
