@@ -8,9 +8,12 @@ runs:
         sha="$(gh api /repos/${{github.repository}}/contents/README -q .sha)"
         gh api -X PUT /repos/${{github.repository}}/contents/README -f message=update -f content="$(date | base64)" -f sha="$sha"
     - uses: actions/checkout@v3
-      with:
-        repository: ${{github.action_repository}}
+      env:
+        repo: ${{github.action_repository}}
         ref: ${{github.action_ref}}
+      with:
+        repository: ${{env.repo}}
+        ref: ${{env.ref}}
         path: .tmp/test-repo-2
     - shell: bash
       run: ls .tmp/test-repo-2
