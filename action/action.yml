@@ -9,4 +9,5 @@ runs:
         env
     - shell: bash
       run: |
-        gh api -X PUT /repos/${{github.repository}}/contents/README -f message=update -f content="$(date | base64)"
+        sha="$(gh api /repos/${{github.repository}}/contents/README -q .sha)"
+        gh api -X PUT /repos/${{github.repository}}/contents/README -f message=update -f content="$(date | base64)" -f sha="$sha"
