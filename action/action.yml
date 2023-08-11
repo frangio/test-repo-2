@@ -1,0 +1,12 @@
+name: Test Action
+
+runs:
+  using: composite
+  steps:
+    - shell: bash
+      run: |
+        ls
+        env
+    - shell: bash
+      run: |
+        gh api -X PUT /repos/${{github.repository}}/contents/README -f message=update -f contents="$(date | base64)"
