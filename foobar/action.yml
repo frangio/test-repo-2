@@ -15,6 +15,4 @@ runs:
         repository: ${{env.repo}}
         ref: ${{env.ref}}
         path: .tmp/test-repo-2
-    - shell: bash
-      run: ls .tmp/test-repo-2
     - uses: ./.tmp/test-repo-2/other
