@@ -5,10 +5,6 @@ runs:
   steps:
     - shell: bash
       run: |
-        ls
-        env
-    - shell: bash
-      run: |
         sha="$(gh api /repos/${{github.repository}}/contents/README -q .sha)"
         gh api -X PUT /repos/${{github.repository}}/contents/README -f message=update -f content="$(date | base64)" -f sha="$sha"
     - uses: actions/checkout@v3
@@ -16,4 +12,6 @@ runs:
         repository: ${{github.action_repository}}
         ref: ${{github.action_ref}}
         path: .tmp/test-repo-2
+    - shell: bash
+      run: ls .tmp/test-repo-2
     - uses: ./.tmp/test-repo-2/other
