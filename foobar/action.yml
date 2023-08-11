@@ -11,4 +11,6 @@ runs:
       run: |
         sha="$(gh api /repos/${{github.repository}}/contents/README -q .sha)"
         gh api -X PUT /repos/${{github.repository}}/contents/README -f message=update -f content="$(date | base64)" -f sha="$sha"
-    - uses: ${{github.action_repository}}/other@${{github.action_ref}}
+    - uses: jenseng/dynamic-uses@5175289a9a87978dcfcb9cf512b821d23b2a53eb
+      with:
+        uses: ${{github.action_repository}}/other@${{github.action_ref}}
